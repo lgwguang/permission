@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -35,7 +36,32 @@ public class PermissionUtils {
         }
     }
 
+    public static void callBack(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        switch (requestCode) {
+            case REQUEST_PERMISSION: {
+                if(grantResults.length == 0){
+                    Log.d(TAG, "用户取消了权限弹窗");
+                    return;
+                }
 
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "权限请求通过");
+                } else {
+                    Log.d(TAG, "权限请求失败");
+                }
+
+                // 用户拒绝了某些权限
+                for (int x : grantResults) {
+                    Log.d(TAG, x + "");
+                    if (x == PackageManager.PERMISSION_DENIED) {
+                        Log.d(TAG, "用户拒绝了某些权限");
+                        return;
+                    }
+                }
+                return;
+            }
+        }
+    }
 
 
 }

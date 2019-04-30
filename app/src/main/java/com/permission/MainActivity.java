@@ -41,33 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_PERMISSION: {
-                if(grantResults.length == 0){
-                    Log.d(TAG, "用户取消了权限弹窗");
-                    return;
-                }
-
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "权限请求通过");
-                } else {
-                    Log.d(TAG, "权限请求失败");
-                }
-
-                // 用户拒绝了某些权限
-                for (int x : grantResults) {
-                    Log.d(TAG, x + "");
-                    if (x == PackageManager.PERMISSION_DENIED) {
-                        Log.d(TAG, "用户拒绝了某些权限");
-                        return;
-                    }
-                }
-
-
-
-                return;
-            }
-        }
+        PermissionUtils.callBack(requestCode,permissions,grantResults);
     }
 
     public void request(View view) {
