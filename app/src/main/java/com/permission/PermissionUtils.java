@@ -12,7 +12,6 @@ import android.util.Log;
 /**
  * author： liguangwei
  * date： 2019/04/30
- * Email： ligw@wanbu.com.cn
  **/
 public class PermissionUtils {
 

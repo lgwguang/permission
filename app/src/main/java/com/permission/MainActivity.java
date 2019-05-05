@@ -14,17 +14,16 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_PERMISSION = 0x01;
     public static String TAG = MainActivity.class.getSimpleName();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     public void requestPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG,ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS)+"");
-
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_PERMISSION);
 
             //第一次返回false；拒绝后再次点击会返回true;勾选不再询问后返回false;
@@ -48,4 +47,5 @@ public class MainActivity extends AppCompatActivity {
         PermissionUtils.requestPermissions(this);
 
     }
+
 }
